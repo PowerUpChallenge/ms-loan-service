@@ -5,6 +5,8 @@ import com.powerup.exceptions.UserAuthNotFoundException;
 import com.powerup.model.loanapplication.LoanApplication;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
+
 /**
  * LoanApplicationUseCase class handles the business logic for loan applications.
  * It interacts with repositories for loan applications, loan types, and user authentication.
@@ -46,6 +48,7 @@ public class LoanApplicationUseCase {
                                 .flatMap(user -> {
                                     loanApplication.setEmail(user.getEmail());
                                     loanApplication.setIdLoanStatus(PENDING_STATUS_ID);
+                                    loanApplication.setApplicationDate(LocalDateTime.now());
                                     return loanApplicationRepository.save(loanApplication);
                                 })
                 );
