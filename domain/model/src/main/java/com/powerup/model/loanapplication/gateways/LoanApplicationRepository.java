@@ -18,6 +18,6 @@ public interface LoanApplicationRepository {
      * @param loanApplication The loan application to be saved.
      * @return A Mono emitting the saved LoanApplication.
      */
-    Mono<LoanApplication> save(LoanApplication loanApplication);
+    Mono<LoanApplication> saveLoanApplication(LoanApplication loanApplication);
 
 }

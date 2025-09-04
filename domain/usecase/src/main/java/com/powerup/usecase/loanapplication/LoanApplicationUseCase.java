@@ -49,7 +49,7 @@ public class LoanApplicationUseCase {
                                     loanApplication.setEmail(user.getEmail());
                                     loanApplication.setIdLoanStatus(PENDING_STATUS_ID);
                                     loanApplication.setApplicationDate(LocalDateTime.now());
-                                    return loanApplicationRepository.save(loanApplication);
+                                    return loanApplicationRepository.saveLoanApplication(loanApplication);
                                 })
                 );
     }
