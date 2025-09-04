@@ -1,5 +1,7 @@
 package com.powerup.usecase.loanapplication;
 
+import com.powerup.exceptions.LoanTypeNotFoundException;
+import com.powerup.exceptions.UserAuthNotFoundException;
 import com.powerup.model.loanapplication.LoanApplication;
 import reactor.core.publisher.Mono;
 
@@ -17,6 +19,8 @@ public class LoanApplicationUseCase {
     private final com.powerup.model.loantype.gateways.LoanTypeRepository loanTypeRepository;
     private final com.powerup.model.userauth.gateways.UserAuthRepository authRepository;
 
+    private static final String ERROR_LOAN_TYPE_NOT_FOUND = "Loan type not found";
+    private static final String ERROR_USER_NOT_FOUND = "User not found";
     private static final Long PENDING_STATUS_ID = 1L;
 
     public LoanApplicationUseCase(com.powerup.model.loanapplication.gateways.LoanApplicationRepository loanApplicationRepository,
@@ -27,12 +31,18 @@ public class LoanApplicationUseCase {
         this.authRepository = authRepository;
     }
 
+    /**
+     * Saves a loan application after validating the loan type and user existence.
+     *
+     * @param loanApplication The loan application to be saved.
+     * @return A Mono emitting the saved LoanApplication or an error if validation fails.
+     */
     public Mono<LoanApplication> saveLoanApplication(LoanApplication loanApplication) {
         return loanTypeRepository.getLoanTypeById(loanApplication.getIdLoanType())
-                .switchIfEmpty(Mono.error(new IllegalArgumentException("Loan type not found")))
+                .switchIfEmpty(Mono.error(new LoanTypeNotFoundException(ERROR_LOAN_TYPE_NOT_FOUND)))
                 .flatMap(loanType ->
                         authRepository.findByIdNumber(loanApplication.getIdNumber())
-                                .switchIfEmpty(Mono.error(new IllegalArgumentException("Document not found in ms-auth-service")))
+                                .switchIfEmpty(Mono.error(new UserAuthNotFoundException(ERROR_USER_NOT_FOUND)))
                                 .flatMap(user -> {
                                     loanApplication.setEmail(user.getEmail());
                                     loanApplication.setIdLoanStatus(PENDING_STATUS_ID);
