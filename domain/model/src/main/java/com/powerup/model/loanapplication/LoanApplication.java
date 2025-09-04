@@ -1,5 +1,7 @@
 package com.powerup.model.loanapplication;
 
+import java.time.LocalDateTime;
+
 /**
  * LoanApplication class represents a loan application model
  * It includes fields such as idLoanApplication, email, idLoanType, amount, term, and idLoanStatus.
@@ -15,19 +17,23 @@ public class LoanApplication {
     private Long idLoanType;
     private String amount;
     private Integer term;
+    private LocalDateTime applicationDate;
     private Long idLoanStatus;
+    private LocalDateTime statusChangeDate;
 
     public LoanApplication() {
     }
 
-    public LoanApplication(Long idLoanApplication, String email, String idNumber, Long idLoanType, String amount, Integer term, Long idLoanStatus) {
+    public LoanApplication(Long idLoanApplication, String email, String idNumber, Long idLoanType, String amount, Integer term, LocalDateTime applicationDate, Long idLoanStatus, LocalDateTime statusChangeDate) {
         this.idLoanApplication = idLoanApplication;
         this.email = email;
         this.idNumber = idNumber;
         this.idLoanType = idLoanType;
         this.amount = amount;
         this.term = term;
+        this.applicationDate = applicationDate;
         this.idLoanStatus = idLoanStatus;
+        this.statusChangeDate = statusChangeDate;
     }
 
     public Long getIdLoanApplication() {
@@ -44,6 +50,14 @@ public class LoanApplication {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
     }
 
     public Long getIdLoanType() {
@@ -70,6 +84,14 @@ public class LoanApplication {
         this.term = term;
     }
 
+    public LocalDateTime getApplicationDate() {
+        return applicationDate;
+    }
+
+    public void setApplicationDate(LocalDateTime applicationDate) {
+        this.applicationDate = applicationDate;
+    }
+
     public Long getIdLoanStatus() {
         return idLoanStatus;
     }
@@ -78,11 +100,11 @@ public class LoanApplication {
         this.idLoanStatus = idLoanStatus;
     }
 
-    public String getIdNumber() {
-        return idNumber;
+    public LocalDateTime getStatusChangeDate() {
+        return statusChangeDate;
     }
 
-    public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
+    public void setStatusChangeDate(LocalDateTime statusChangeDate) {
+        this.statusChangeDate = statusChangeDate;
     }
 }

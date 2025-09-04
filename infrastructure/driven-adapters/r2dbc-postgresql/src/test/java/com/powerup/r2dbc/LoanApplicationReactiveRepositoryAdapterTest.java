@@ -1,5 +1,7 @@
 package com.powerup.r2dbc;
 
+import com.powerup.r2dbc.loantype.LoanTypeReactiveRepository;
+import com.powerup.r2dbc.loantype.LoanTypeReactiveRepositoryAdapter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,14 +17,14 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class MyReactiveRepositoryAdapterTest {
+class LoanStatusReactiveRepositoryAdapterTest {
     // TODO: change four you own tests
 
     @InjectMocks
-    MyReactiveRepositoryAdapter repositoryAdapter;
+    LoanTypeReactiveRepositoryAdapter repositoryAdapter;
 
     @Mock
-    MyReactiveRepository repository;
+    LoanTypeReactiveRepository repository;
 
     @Mock
     ObjectMapper mapper;
