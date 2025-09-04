@@ -11,6 +11,7 @@ public class LoanApplication {
 
     private Long idLoanApplication;
     private String email;
+    private String idNumber;
     private Long idLoanType;
     private String amount;
     private Integer term;
@@ -19,9 +20,10 @@ public class LoanApplication {
     public LoanApplication() {
     }
 
-    public LoanApplication(Long idLoanApplication, String email, Long idLoanType, String amount, Integer term, Long idLoanStatus) {
+    public LoanApplication(Long idLoanApplication, String email, String idNumber, Long idLoanType, String amount, Integer term, Long idLoanStatus) {
         this.idLoanApplication = idLoanApplication;
         this.email = email;
+        this.idNumber = idNumber;
         this.idLoanType = idLoanType;
         this.amount = amount;
         this.term = term;
@@ -74,5 +76,13 @@ public class LoanApplication {
 
     public void setIdLoanStatus(Long idLoanStatus) {
         this.idLoanStatus = idLoanStatus;
+    }
+
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
     }
 }

@@ -18,6 +18,6 @@ public interface LoanTypeRepository {
      * @param idLoanType The ID of the loan type to be retrieved.
      * @return A Mono emitting the LoanType with the specified ID.
      */
-    Mono<LoanType> getById(Long idLoanType);
+    Mono<LoanType> getLoanTypeById(Long idLoanType);
 
 }

@@ -18,6 +18,6 @@ public interface LoanStatusRepository {
      * @param idLoanStatus The ID of the loan status to be retrieved.
      * @return A Mono emitting the LoanStatus with the specified ID.
      */
-    Mono<LoanStatus> getById(Long idLoanStatus);
+    Mono<LoanStatus> getLoanStatusById(Long idLoanStatus);
 
 }
