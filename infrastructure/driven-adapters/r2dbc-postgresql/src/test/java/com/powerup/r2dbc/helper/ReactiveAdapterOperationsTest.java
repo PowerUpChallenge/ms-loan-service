@@ -31,20 +31,20 @@ class ReactiveAdapterOperationsTest {
     }
 
     @Test
-    void save() {
+    void saveLoanApplication() {
         DummyEntity entity = new DummyEntity("1", "test");
         DummyData data = new DummyData("1", "test");
 
         when(mapper.map(entity, DummyData.class)).thenReturn(data);
         when(repository.save(data)).thenReturn(Mono.just(data));
 
-        StepVerifier.create(operations.save(entity))
+        StepVerifier.create(operations.saveLoanApplication(entity))
                 .expectNext(entity)
                 .verifyComplete();
     }
 
     @Test
-    void saveAllEntities() {
+    void saveLoanApplicationAllEntities() {
         DummyEntity entity1 = new DummyEntity("1", "test1");
         DummyEntity entity2 = new DummyEntity("2", "test2");
         DummyData data1 = new DummyData("1", "test1");

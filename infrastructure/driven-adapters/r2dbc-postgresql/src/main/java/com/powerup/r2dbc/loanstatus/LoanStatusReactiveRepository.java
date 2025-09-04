@@ -1,18 +1,17 @@
-package com.powerup.r2dbc.loantype;
+package com.powerup.r2dbc.loanstatus;
 
 import org.springframework.data.repository.query.ReactiveQueryByExampleExecutor;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
-import reactor.core.publisher.Mono;
 
 /**
- * Reactive repository interface for LoanTypeEntity.
+ * Reactive repository interface for LoanStatusEntity.
  * Extends ReactiveCrudRepository for basic CRUD operations
  * and ReactiveQueryByExampleExecutor for query by example functionality.
  *
  * @version 1.0
  * @since 2025-09-04
  */
-public interface LoanTypeReactiveRepository extends
-        ReactiveCrudRepository<LoanTypeEntity, Long>, ReactiveQueryByExampleExecutor<LoanTypeEntity> {
+public interface LoanStatusReactiveRepository extends
+        ReactiveCrudRepository<LoanStatusEntity, Long>, ReactiveQueryByExampleExecutor<LoanStatusEntity> {
 
 }

@@ -17,7 +17,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class LoanStatusReactiveRepositoryAdapterTest {
+class LoanApplicationReactiveRepositoryAdapterTest {
     // TODO: change four you own tests
 
     @InjectMocks
@@ -71,7 +71,7 @@ class LoanStatusReactiveRepositoryAdapterTest {
         when(repository.save("test")).thenReturn(Mono.just("test"));
         when(mapper.map("test", Object.class)).thenReturn("test");
 
-        Mono<Object> result = repositoryAdapter.save("test");
+        Mono<Object> result = repositoryAdapter.saveLoanApplication("test");
 
         StepVerifier.create(result)
                 .expectNextMatches(value -> value.equals("test"))
