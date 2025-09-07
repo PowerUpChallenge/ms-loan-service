@@ -1,5 +1,6 @@
 package com.powerup.api;
 
+import com.powerup.api.config.RoleAuthorizationFilter;
 import com.powerup.api.dto.request.LoanApplicationRequestDTO;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,6 +11,7 @@ import org.springdoc.core.annotations.RouterOperations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
+import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
@@ -25,6 +27,12 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 @Configuration
 @Tag(name = "Loan Applications", description = "Endpoints for loan application handling")
 public class LoanApplicationRouterRest {
+
+    private final RoleAuthorizationFilter roleAuthorizationFilter;
+
+    public LoanApplicationRouterRest(RoleAuthorizationFilter roleAuthorizationFilter) {
+        this.roleAuthorizationFilter = roleAuthorizationFilter;
+    }
 
     @Bean
     @RouterOperations({
@@ -55,7 +63,11 @@ public class LoanApplicationRouterRest {
             )
     })
     public RouterFunction<ServerResponse> routerFunction(LoanApplicationHandler loanApplicationHandler) {
-        return route(POST("/api/v1/solicitud"), loanApplicationHandler::loanApplication);
+        return RouterFunctions.route()
+                .POST("/api/v1/solicitud", loanApplicationHandler::loanApplication)
+                .filter(roleAuthorizationFilter.requireRole("ROLE_CLIENTE"))
+                .build();
+//        return route(POST("/api/v1/solicitud"), loanApplicationHandler::loanApplication);
     }
 
 }
