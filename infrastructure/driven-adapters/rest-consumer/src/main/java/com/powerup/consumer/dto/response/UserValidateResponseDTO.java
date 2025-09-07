@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Builder
-public class UserResponseDTO {
+public class UserValidateResponseDTO {
 
     private String idNumber;
     private Integer idType;

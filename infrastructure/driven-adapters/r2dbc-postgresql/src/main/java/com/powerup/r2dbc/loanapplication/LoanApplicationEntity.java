@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Table(name = "loan_application")
@@ -24,7 +25,7 @@ public class LoanApplicationEntity {
     @Column("id_loan_type")
     private Long idLoanType;
 
-    private String amount;
+    private BigDecimal amount;
     private Integer term;
 
     @Column("application_date")

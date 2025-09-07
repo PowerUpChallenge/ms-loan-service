@@ -1,5 +1,6 @@
 package com.powerup.model.loanapplication;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -15,7 +16,7 @@ public class LoanApplication {
     private String email;
     private String idNumber;
     private Long idLoanType;
-    private String amount;
+    private BigDecimal amount;
     private Integer term;
     private LocalDateTime applicationDate;
     private Long idLoanStatus;
@@ -24,7 +25,7 @@ public class LoanApplication {
     public LoanApplication() {
     }
 
-    public LoanApplication(Long idLoanApplication, String email, String idNumber, Long idLoanType, String amount, Integer term, LocalDateTime applicationDate, Long idLoanStatus, LocalDateTime statusChangeDate) {
+    public LoanApplication(Long idLoanApplication, String email, String idNumber, Long idLoanType, BigDecimal amount, Integer term, LocalDateTime applicationDate, Long idLoanStatus, LocalDateTime statusChangeDate) {
         this.idLoanApplication = idLoanApplication;
         this.email = email;
         this.idNumber = idNumber;
@@ -68,11 +69,11 @@ public class LoanApplication {
         this.idLoanType = idLoanType;
     }
 
-    public String getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

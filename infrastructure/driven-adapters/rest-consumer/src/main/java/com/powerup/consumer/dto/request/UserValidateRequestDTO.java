@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class UserRequestDTO {
+public class UserValidateRequestDTO {
 
     private String idNumber;
 
