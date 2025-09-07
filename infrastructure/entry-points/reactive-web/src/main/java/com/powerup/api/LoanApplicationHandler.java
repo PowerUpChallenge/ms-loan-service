@@ -37,8 +37,7 @@ public class LoanApplicationHandler {
                                         .contentType(MediaType.APPLICATION_JSON)
                                         .bodyValue(Map.of(
                                                 "status", "success",
-                                                "message", "Loan Application saved successfully",
-                                                "user", loanApplicationMapper.toResponseDTO(loan)
+                                                "message", "Loan Application saved successfully"
                                         ))
                                 )
                 );

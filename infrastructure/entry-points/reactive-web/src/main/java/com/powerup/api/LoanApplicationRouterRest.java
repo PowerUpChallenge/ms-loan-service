@@ -1,5 +1,9 @@
 package com.powerup.api;
 
+import com.powerup.api.dto.request.LoanApplicationRequestDTO;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.core.annotations.RouterOperation;
 import org.springdoc.core.annotations.RouterOperations;
@@ -30,6 +34,13 @@ public class LoanApplicationRouterRest {
                             operationId = "loanApplication",
                             summary = "Submit a loan application",
                             description = "Submits a new loan application to the system.",
+                            requestBody = @RequestBody(
+                                    required = true,
+                                    content = @Content(
+                                            mediaType = "application/json",
+                                            schema = @Schema(implementation = LoanApplicationRequestDTO.class)
+                                    )
+                            ),
                             responses = {
                                     @io.swagger.v3.oas.annotations.responses.ApiResponse(
                                             responseCode = "200",
