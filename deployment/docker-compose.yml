@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres_ms_loan
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${R2DBC_DATABASE}
+      POSTGRES_USER: ${R2DBC_USERNAME}
+      POSTGRES_PASSWORD: ${R2DBC_PASSWORD}
+      POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256
+    ports:
+      - "${R2DBC_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts/00-schema.sql:/docker-entrypoint-initdb.d/00-schema.sql
+      - ./init-scripts/01-init.sql:/docker-entrypoint-initdb.d/01-init.sql
+    networks:
+      - postgres_network
+
+volumes:
+  postgres_data:
+
+networks:
+  postgres_network:
+    driver: bridge

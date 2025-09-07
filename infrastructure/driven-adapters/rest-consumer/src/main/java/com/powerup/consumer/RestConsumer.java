@@ -1,7 +1,6 @@
 package com.powerup.consumer;
 
-import com.powerup.consumer.dto.request.UserRequestDTO;
-import com.powerup.consumer.dto.response.UserResponseDTO;
+import com.powerup.consumer.dto.request.UserValidateRequestDTO;
 import com.powerup.model.userauth.UserAuth;
 import com.powerup.model.userauth.gateways.UserAuthRepository;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
@@ -33,13 +32,13 @@ public class RestConsumer implements UserAuthRepository{
     @CircuitBreaker(name = "findUserByIdNumber")
     public Mono<UserAuth> findByIdNumber(String idNumber) {
 
-        UserRequestDTO userRequestDTO = UserRequestDTO.builder()
+        UserValidateRequestDTO userValidateRequestDTO = UserValidateRequestDTO.builder()
                 .idNumber(idNumber)
                 .build();
 
         return client.post()
-                .uri("/api/v1/usuarios")
-                .bodyValue(userRequestDTO)
+                .uri("/api/v1/usuarios/find")
+                .bodyValue(userValidateRequestDTO)
                 .retrieve()
                 .bodyToMono(UserAuth.class);
     }
