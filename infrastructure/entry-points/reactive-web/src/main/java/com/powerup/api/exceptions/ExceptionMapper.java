@@ -22,6 +22,8 @@ public class ExceptionMapper  {
 
     private static final Map<Class<? extends Throwable>, ErrorDefinition> ERROR_MAP = Map.of(
             LoanTypeNotFoundException.class, new ErrorDefinition(HttpStatus.NOT_FOUND, ERROR_LOAN_TYPE_NOT_FOUND_MESSAGE),
+            UnauthorizedException.class, new ErrorDefinition(HttpStatus.UNAUTHORIZED, ERROR_UNAUTHORIZED_MESSAGE),
+            ForbiddenException.class, new ErrorDefinition(HttpStatus.FORBIDDEN, ERROR_FORBBIDEN_MESSAGE),
             UserAuthNotFoundException.class, new ErrorDefinition(HttpStatus.NOT_FOUND, ERROR_USER_NOT_FOUND_MESSAGE)
     );
 

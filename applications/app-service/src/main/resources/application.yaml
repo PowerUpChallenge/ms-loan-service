@@ -27,12 +27,17 @@ cors:
   allowed-origins: "http://localhost:4200,http://localhost:8080"
 adapters:
   r2dbc:
-    host: "${R2DBC_HOST:localhost}"
-    port: "${R2DBC_PORT:5432}"
-    database: "${R2DBC_DATABASE:ms-loan}"
-    username: "${R2DBC_USERNAME:postgres}"
-    password: "${R2DBC_PASSWORD:S3cureP@ssw0rd!}"
-    schema: "${R2DBC_SCHEMA:public}"
+    host: "${R2DBC_HOST}"
+    port: "${R2DBC_PORT}"
+    database: "${R2DBC_DATABASE}"
+    username: "${R2DBC_USERNAME}"
+    password: "${R2DBC_PASSWORD}"
+    schema: "${R2DBC_SCHEMA}"
+
+security:
+  jwt:
+    secret: "${JWT_SECRET}"
+    ttl-seconds: "${JWT_EXPIRATION}"
 
 adapter:
   restconsumer:
