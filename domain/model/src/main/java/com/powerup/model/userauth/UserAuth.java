@@ -12,6 +12,7 @@ import java.time.LocalDate;
  */
 public class UserAuth {
 
+    private Long userId;
     private String idNumber;
     private Integer idType;
     private String name;
@@ -24,8 +25,8 @@ public class UserAuth {
 
     public UserAuth() {
     }
-
-    public UserAuth(String idNumber, Integer idType, String name, String lastname, LocalDate birthDate, String address, String phone, String email, BigDecimal baseSalary) {
+    public UserAuth(Long userId, String idNumber, Integer idType, String name, String lastname, LocalDate birthDate, String address, String phone, String email, BigDecimal baseSalary) {
+        this.userId = userId;
         this.idNumber = idNumber;
         this.idType = idType;
         this.name = name;
@@ -35,6 +36,14 @@ public class UserAuth {
         this.phone = phone;
         this.email = email;
         this.baseSalary = baseSalary;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getIdNumber() {

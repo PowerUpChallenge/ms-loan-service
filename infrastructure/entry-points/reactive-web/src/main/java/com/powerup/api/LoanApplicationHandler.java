@@ -23,6 +23,26 @@ public class LoanApplicationHandler {
     private final LoanApplicationMapper loanApplicationMapper;
     private final LoanApplicationUseCase loanApplicationUseCase;
 
+//    public Mono<ServerResponse> loanApplication(ServerRequest request) {
+//        log.info(LOAN_APPLICATION_START, request.path());
+//
+//        return request.bodyToMono(LoanApplicationRequestDTO.class)
+//                .doOnNext(dto -> log.info(LOAN_APPLICATION_DATA, request.path(), dto))
+//                .map(loanApplicationMapper::toModel)
+//                .flatMap(loan ->
+//                        loanApplicationUseCase.saveLoanApplication(loan)
+//                                .doOnSuccess(v -> log.info(LOAN_APPLICATION_SUCCESS, request.path()))
+//                                .doOnError(e -> log.error(LOAN_APPLICATION_ERROR, request.path(), e.getMessage()))
+//                                .then(ServerResponse.ok()
+//                                        .contentType(MediaType.APPLICATION_JSON)
+//                                        .bodyValue(Map.of(
+//                                                "status", "success",
+//                                                "message", "Loan Application saved successfully"
+//                                        ))
+//                                )
+//                );
+//    }
+
     public Mono<ServerResponse> loanApplication(ServerRequest request) {
         log.info(LOAN_APPLICATION_START, request.path());
 
@@ -30,16 +50,19 @@ public class LoanApplicationHandler {
                 .doOnNext(dto -> log.info(LOAN_APPLICATION_DATA, request.path(), dto))
                 .map(loanApplicationMapper::toModel)
                 .flatMap(loan ->
-                        loanApplicationUseCase.saveLoanApplication(loan)
-                                .doOnSuccess(v -> log.info(LOAN_APPLICATION_SUCCESS, request.path()))
-                                .doOnError(e -> log.error(LOAN_APPLICATION_ERROR, request.path(), e.getMessage()))
-                                .then(ServerResponse.ok()
-                                        .contentType(MediaType.APPLICATION_JSON)
-                                        .bodyValue(Map.of(
-                                                "status", "success",
-                                                "message", "Loan Application saved successfully"
-                                        ))
-                                )
+                        Mono.deferContextual(ctx -> {
+                            String authUserId = ctx.get("authUserId"); // viene del filtro
+                            return loanApplicationUseCase.saveLoanApplication(loan, authUserId)
+                                    .doOnSuccess(v -> log.info(LOAN_APPLICATION_SUCCESS, request.path()))
+                                    .doOnError(e -> log.error(LOAN_APPLICATION_ERROR, request.path(), e.getMessage()))
+                                    .then(ServerResponse.ok()
+                                            .contentType(MediaType.APPLICATION_JSON)
+                                            .bodyValue(Map.of(
+                                                    "status", "success",
+                                                    "message", "Loan Application saved successfully"
+                                            ))
+                                    );
+                        })
                 );
     }
 

@@ -12,6 +12,7 @@ public class ExceptionConstants {
     public static final String ERROR_USER_NOT_FOUND_MESSAGE = "User not found";
     public static final String ERROR_LOAN_TYPE_NOT_FOUND_MESSAGE = "Loan Type not found";
     public static final String ERROR_UNAUTHORIZED_MESSAGE = "Unauthorized access";
+    public static final String ERROR_UNAUTHORIZED_USER_MESSAGE = "The authenticated user does not match the one in the request.";
     public static final String ERROR_FORBBIDEN_MESSAGE = "Access forbidden";
 
     private ExceptionConstants(){
